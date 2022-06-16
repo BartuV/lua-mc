@@ -9,7 +9,7 @@ description = {
    detailed = [[
       This lib makes making minecraft datapacks too easy that even a monkey can do it.
    ]],
-   homepage = "https://github.com/BartuV/lua-mc", 
+   homepage = "https://github.com/BartuV/lua-mc",  
    license = "MIT" 
 }
 dependencies = {
