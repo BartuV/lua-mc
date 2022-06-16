@@ -1,0 +1,26 @@
+package = "lua-mc"
+version = "1.0-1"
+source = {
+   url = "git+https://github.com/BartuV/lua-mc.git",
+   tag = "v1.0"
+}
+description = {
+   summary = "This lib makes making minecraft datapacks easy",
+   detailed = [[
+      This lib makes making minecraft datapacks too easy that even a monkey can do it.
+   ]],
+   homepage = "https://github.com/BartuV/lua-mc", 
+   license = "MIT" 
+}
+dependencies = {
+   "lua >= 5.1",
+   "luajson >= 1.3.4-1",
+   "luafilesystem >= 1.8.0-1",
+   "eansi >= 1.1-1"
+}
+build = {
+   type = "builtin",
+   modules = {
+    compile = "compile.lua",
+   }
+}
