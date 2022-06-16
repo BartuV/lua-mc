@@ -34,25 +34,7 @@ function edit_file_dont_overwrite(file, command)
     end
 end
 
-function copy_directory(source, destination,name)
-    local lfs = require "lfs"
-    local rename1 = source .. "/example"
-    local rename2 = source .. "/example/data/example"
-    for file in lfs.dir(source) do
-        if file ~= "." and file ~= ".." then
-            local source_file = source .. "/" .. file
-            local destination_file = destination .. "/" .. file
-            if lfs.attributes(source_file, "mode") == "directory" then
-                lfs.mkdir(destination_file)
-                copy_directory(source_file, destination_file)
-            else
-                copy(source_file, destination_file)
-            end
-        end 
-    end
-end
-
-function copy_directory_rename(source, destination,name)
+local function copy_directory_rename(source, destination,name)
     local lfs = require "lfs"
     local rename1 = source .. "/example"
     local rename2 = source .. "/example/data/example"
@@ -76,7 +58,7 @@ function copy_directory_rename(source, destination,name)
     end
 end
 
-function rename(old,new)
+local function rename(old,new)
     os.rename(old,new)
 end
 
@@ -89,11 +71,11 @@ function edit_file(filepath, text)
     end
 end
     
-function replace(str, old, new)
+local function replace(str, old, new)
     return (str:gsub(old, new))
 end
 
-function edit_packmeta(version, description, packlocation)
+local function edit_packmeta(version, description, packlocation)
     local packmeta = packlocation.. "/pack.mcmeta"
     local meta = {
         ["pack"] = {
@@ -107,7 +89,7 @@ function edit_packmeta(version, description, packlocation)
     edit_file(packmeta, encode)
 end
 
-function edit_load(location, name)
+local function edit_load(location, name)
     local load = location.."/data/minecraft/tags/functions/load.json"
     local meta = {
         ["values"] = {"example:load"}
@@ -118,7 +100,7 @@ function edit_load(location, name)
     edit_file(load, encode)
 end
 
-function edit_tick(location, name)
+local function edit_tick(location, name)
     local load = location.."/data/minecraft/tags/functions/tick.json"
     local meta = {
         ["values"] = {"example:tick"}
