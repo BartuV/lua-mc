@@ -2,7 +2,6 @@ package = "lua-mc"
 version = "1.0-1"
 source = {
    url = "git+https://github.com/BartuV/lua-mc.git",
-   tag = "v1.0"
 }
 description = {
    summary = "This lib makes making minecraft datapacks easy",
@@ -21,6 +20,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-    compile = "compile.lua",
+    compile = "luamc/compile.lua",
    }
 }
