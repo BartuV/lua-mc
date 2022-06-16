@@ -20,6 +20,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      compile = "../luamc/compile.lua",
+      compile = "compile.lua",
    }
 }
