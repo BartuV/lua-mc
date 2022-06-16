@@ -1,5 +1,5 @@
 package = "lua-mc"
-version = "1.0-1"
+version = "1.0-3"
 source = {
    url = "git+https://github.com/BartuV/lua-mc.git",
 }
@@ -20,6 +20,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-    compile = "luamc/compile.lua",
+      compile = "../luamc/compile.lua",
    }
 }
