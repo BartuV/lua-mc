@@ -1,0 +1,10 @@
+{
+    "Lua.diagnostics.globals": [
+        "info",
+        "error",
+        "warn",
+        "copy",
+        "replace",
+        "rename"
+    ]
+}
