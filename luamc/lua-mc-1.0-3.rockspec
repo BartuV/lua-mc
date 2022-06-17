@@ -20,6 +20,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      ["lua-mc"] = "lua-mc.lua",
+      main = "luamc.lua",
    }
 }
