@@ -135,12 +135,7 @@ local app = {
     location = "/home/BartuBartu/Desktop/Lua",
     name = "a",
     elements = {
-        tick = {
-
-        },
-        load = {
-
-        },
+        
     },
 }
 
@@ -902,5 +897,5 @@ clear = function(player,file)
 end
 
 clone = {
-    
+
 }
