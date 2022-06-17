@@ -896,6 +896,3 @@ clear = function(player,file)
     app.elements[#app.elements + 1] = {"clear "..player,file..".mcfunction"}
 end
 
-clone = {
-
-}

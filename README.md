@@ -19,7 +19,7 @@ local lua-mc = require "lua-mc"
 local app = {
    version = 1-9,
    description = "something",
-   location = "/home/BartuBartu/Desktop/Lua",
+   location = "where is gonna installed",
    name = "a",
    elements = {
        
@@ -37,6 +37,9 @@ compile(app)
 ```
 
 
-
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+# Development Status
+Still under development it can be buggy or broken
