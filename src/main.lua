@@ -1,4 +1,3 @@
-local create = require "create"
 local lfs = require "lfs"
 local eansi = require "eansi"
 local json = require "lunajson"
@@ -42,7 +41,6 @@ function edit_file_dont_overwrite(file, command)
 end
 
 local function copy_directory_rename(source, destination,name)
-    local lfs = require "lfs"
     local rename1 = source .. "/example"
     local rename2 = source .. "/example/data/example"
     local index = 1;

@@ -20,6 +20,6 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      main = "src/main.lua", 
+      main = "/home/BartuBartu/Desktop/Lua/src/main.lua", 
    }
 }
