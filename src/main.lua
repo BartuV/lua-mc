@@ -65,10 +65,6 @@ local function copy_directory_rename(source, destination,name)
     end
 end
 
-local function rename(old,new)
-    os.rename(old,new)
-end
-
 function edit_file(filepath, text)
     local file = io.open(filepath, "w")
     if file then
