@@ -5,13 +5,15 @@ local tickfile
 local loadfile
 local main
 local ext = os.exit()
-error = function(text)print(eansi.toansi "bold red" .. text .. eansi "")end;info  = function(text)print(eansi.toansi "bold bright_green" .. text .. eansi "")end;warn  = function(text)print(eansi.toansi "bold bright_yellow" .. text .. eansi "") end
 
 --[[
     writen by BartuV
     github profile: github.com/BartuV
     github project: github.com/BartuV/LuaMC
 ]]--
+
+error = function(text)print(eansi.toansi "bold red" .. text .. eansi "") ext() end;info  = function(text)print(eansi.toansi "bold bright_green" .. text .. eansi "")end;warn  = function(text)print(eansi.toansi "bold bright_yellow" .. text .. eansi "") end
+local function isInteger(str) return not (str == "" or str:find("%D")) end
 
 function copy(source, destination)
     local file = io.open(source, "rb")
@@ -133,7 +135,12 @@ local app = {
     location = "/home/BartuBartu/Desktop/Lua",
     name = "a",
     elements = {
-        
+        tick = {
+
+        },
+        load = {
+
+        },
     },
 }
 
@@ -174,7 +181,7 @@ end
 
 function to_file(contents)
     local num = 1
-    for i,v in pairs(contents) do
+    for _,v in pairs(contents) do
         if v[2] == "tick.mcfunction" then
             if num == 1 then
                 edit_file(tickfile, "")
@@ -354,4 +361,546 @@ player = {
             app.elements[#app.elements + 1] = {"team modify "..name.." suffix "..json,file..".mcfunction"}
         end,
     }, 
+
+    message = {
+        send = function (player,message,file)
+            app.elements[#app.elements + 1] = {"tellraw "..player.." "..json.encode(message),file..".mcfunction"}
+        end,
+
+        send_as = function (player,message,file)
+            app.elements[#app.elements + 1] = {"execute as "..player.." "..json.encode(message),file..".mcfunction"}
+        end,
+
+        send_to_all = function (message,file)
+            app.elements[#app.elements + 1] = {"tellraw @a "..json.encode(message),file..".mcfunction"}
+        end,
+
+        private_message = function (player,message,file)
+            app.elements[#app.elements + 1] = {"msg "..player.." "..message,file..".mcfunction"}
+        end,
+    },
+
+    teleport = {
+        teleport = function (x,y,z,file)
+            app.elements[#app.elements + 1] = {"tp @s"..tostring(x).." "..tostring(y).." "..tostring(z),file..".mcfunction"}
+        end,
+
+        teleport_player = function (player,x,y,z,file)
+            app.elements[#app.elements + 1] = {"tp "..player.." "..tostring(x).." "..tostring(y).." "..tostring(z),file..".mcfunction"}
+        end,
+
+        teleport_player_to_player = function (player,to,file)
+            app.elements[#app.elements + 1] = {"tp "..player.." "..to,file..".mcfunction"}
+        end,
+    }
+}
+
+gamerule = {
+    announceAdvancements = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule announceAdvancements "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    commandBlocksEnabled = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule commandBlocksEnabled "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    commandBlockOutput = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule commandBlockOutput "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    disableElytraMovementCheck = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule disableElytraMovementCheck "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    disableRaids = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule disableRaids "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doDaylightCycle = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doDaylightCycle "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doEntityDrops = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doEntityDrops "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doFireTick = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doFireTick "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doInsomnia = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doInsomnia "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doImmediateRespawn = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doImmediateRespawn "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doLimitedCrafting = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doLimitedCrafting "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doMobLoot = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doMobLoot "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doMobSpawning = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doMobSpawning "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doPatrolSpawning = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doPatrolSpawning "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doTileDrops = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doTileDrops "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doTraderSpawning = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doTraderSpawning "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doWeatherCycle = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doWeatherCycle "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    doWardenSpawning = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule doWardenSpawning "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    drowningDamage = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule drowningDamage "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    fallDamage = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule fallDamage "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    fireDamage = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule fireDamage "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    forgiveDeadPlayers = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule forgiveDeadPlayers "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    freezeDamage = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule freezeDamage "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    functionCommandLimit = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule functionCommandLimit "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+    
+    keepInventory = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule keepInventory "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    logAdminCommands = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule logAdminCommands "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    maxCommandChainLength = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule maxCommandChainLength "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    maxEntityCramming = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule maxEntityCramming "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    mobGriefing = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule mobGriefing "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    naturalRegeneration = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule naturalRegeneration "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    playersSleepingPercentage = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule playersSleepingPercentage "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    pvp = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule pvp "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    randomTickSpeed = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule randomTickSpeed "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    reducedDebugInfo = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule reducedDebugInfo "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    respawnBlocksExplode = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule respawnBlocksExplode "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    sendCommandFeedback = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule sendCommandFeedback "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    showCoordinates = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule showCoordinates "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    showDeathMessages = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule showDeathMessages "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    showTags = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule showTags "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    spawnRadius = function (value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"gamerule spawnRadius "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    spectatorsGenerateChunks = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule spectatorsGenerateChunks "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    tntExplodes = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule tntExplodes "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    universalAnger = function (bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"gamerule universalAnger "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+}
+
+advancement = {
+    give_everything = function (player,file)
+        app.elements[#app.elements + 1] = {"advancement grant "..player.." everything",file..".mcfunction"}
+    end,
+
+    remove_everything = function (player,file)
+        app.elements[#app.elements + 1] = {"advancement revoke "..player.." everything",file..".mcfunction"}
+    end,
+
+    give_advancement = function (player,advancement,file)
+        app.elements[#app.elements + 1] = {"advancement grant "..player.." only minecraft: "..advancement,file..".mcfunction"}
+    end, 
+
+    remove_advancement = function (player,advancement,file)
+        app.elements[#app.elements + 1] = {"advancement revoke "..player.." only minecraft: "..advancement,file..".mcfunction"}
+    end,
+}
+
+bossbar = {
+    add = function (name,id,file)
+        app.elements[#app.elements + 1] = {"bossbar add "..tostring(id).." "..name,file..".mcfunction"}
+    end,
+
+    remove = function (id,file)
+        app.elements[#app.elements + 1] = {"bossbar remove "..tostring(id),file..".mcfunction"}
+    end,
+
+    list = function (file)
+        app.elements[#app.elements + 1] = {"bossbar list",file..".mcfunction"}
+    end,
+
+    set_style = function (id,style,file)
+        local lut = {["notched_10"]="sa",["notched_12"]="sa",["notched_20"]="sa",["notched_6"]="sa",["progress"]="sa"}
+        if lut[style] then
+            app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." style "..style,file..".mcfunction"}
+        else
+            info("Avaible styles: notched_10, notched_12, notched_20, notched_6, progress")
+            info("You entered "..style)
+            error("Enter a valid style")
+        end
+    end,
+
+    set_color = function (id,color,file)
+        local lut = {["blue"] = "a",["green"]="a",["pink"]="a",["purple"]="a",["red"]="a",["white"]="a",["yellow"]="a"}
+        if lut[color] then
+            app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." color "..lut[color],file..".mcfunction"}
+        else
+            info("colors are blue, green, pink, purple, red, white, yellow")
+            info("you entered "..color)
+            error("Please enter a valid color")
+        end
+    end,
+
+    set_max = function (id,value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." max "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    set_name = function (id,name,file)
+        app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." name "..name,file..".mcfunction"}
+    end,
+
+    set_players = function (id,players,file)
+        app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." players "..players,file..".mcfunction"}
+    end,
+
+    set_value = function (id,value,file)
+        if type(value) == "number" then
+            app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." value "..tostring(value),file..".mcfunction"}
+        else
+            error("Please enter a number")
+        end
+    end,
+
+    set_visible = function (id,bool,file)
+        if type(bool) == "boolean" then
+            app.elements[#app.elements + 1] = {"bossbar set "..tostring(id).." visible "..tostring(bool),file..".mcfunction"}
+        else
+            error("Please enter a boolean")
+        end
+    end,
+
+    set_to_an_objective_value = function (id,type,objective,file)
+        app.elements[#app.elements + 1] = {"execute store result bossbar "..tostring(id).." "..type.." run scoreboard add FakePlayer "..objective,file..".mcfunction"}
+    end,
+}
+
+ban = {
+    ban_player = function (player,file)
+        app.elements[#app.elements + 1] = {"ban "..player,file..".mcfunction"}
+    end,
+
+    ban_player_with_message = function (player,message,file)
+        app.elements[#app.elements + 1] = {"ban "..player.." "..message,file..".mcfunction"}
+    end,
+
+    ip_ban_player = function (player,file)
+        app.elements[#app.elements + 1] = {"ban-ip "..player,file..".mcfunction"}
+    end,
+
+    ip_ban_player_with_message = function (player,message,file)
+        app.elements[#app.elements + 1] = {"ban-ip "..player.." "..message,file..".mcfunction"}
+    end,
+
+    unban_player = function (player,file)
+        app.elements[#app.elements + 1] = {"pardon "..player,file..".mcfunction"}
+    end,
+
+    unban_ip_player = function (player,file)
+        app.elements[#app.elements + 1] = {"pardon-ip "..player,file..".mcfunction"}
+    end,
+
+    ban_list = function (type,file)
+        if type == "players" or type == "ips" then
+            app.elements[#app.elements + 1] = {"banlist "..type,file..".mcfunction"}
+        else
+            error("Please enter players or ips")
+        end
+    end,
+}
+
+summon = {
+    spawn = function (entitytype,x,y,z,file)
+        app.elements[#app.elements + 1] = {"summon "..entitytype.." "..tostring(x)..","..tostring(y)..","..tostring(z),file..".mcfunction"}
+    end,
+
+    spawn_with_nbt = function (entitytype,x,y,z,nbt,file)
+        app.elements[#app.elements + 1] = {"summon "..entitytype.." "..tostring(x)..","..tostring(y)..","..tostring(z).." "..nbt,file..".mcfunction"}
+    end,
+}
+
+fill = {
+    fill = function (x1,y1,z1,x2,y2,z2,block,file)
+        app.elements[#app.elements + 1] = {"fill "..tostring(x1)..","..tostring(y1)..","..tostring(z1).." "..tostring(x2)..","..tostring(y2)..","..tostring(z2).." "..block,file..".mcfunction"}
+    end,
+
+    replace = function (x1,y1,z1,x2,y2,z2,block,filter_block,file)
+        app.elements[#app.elements + 1] = {"fill "..tostring(x1)..","..tostring(y1)..","..tostring(z1).." "..tostring(x2)..","..tostring(y2)..","..tostring(z2).." "..block.." replace "..filter_block,file..".mcfunction"}
+    end,
+
+    hollow = function (x1,y1,z1,x2,y2,z2,block,file)
+        app.elements[#app.elements + 1] = {"fill "..tostring(x1)..","..tostring(y1)..","..tostring(z1).." "..tostring(x2)..","..tostring(y2)..","..tostring(z2).." "..block.." hollow",file..".mcfunction"}
+    end,
+
+    keep = function (x1,y1,z1,x2,y2,z2,block,file)
+        app.elements[#app.elements + 1] = {"fill "..tostring(x1)..","..tostring(y1)..","..tostring(z1).." "..tostring(x2)..","..tostring(y2)..","..tostring(z2).." "..block.." keep",file..".mcfunction"}
+    end,
+
+    outline = function (x1,y1,z1,x2,y2,z2,block,file)
+        app.elements[#app.elements + 1] = {"fill "..tostring(x1)..","..tostring(y1)..","..tostring(z1).." "..tostring(x2)..","..tostring(y2)..","..tostring(z2).." "..block.." outline",file..".mcfunction"}
+    end,
+}
+
+clear = function(player,file)
+    app.elements[#app.elements + 1] = {"clear "..player,file..".mcfunction"}
+end
+
+clone = {
+    
 }
